@@ -3,6 +3,9 @@
 #include "filter_1st_order.h"
 #include "matrix_io.h"
 
+//* for codegen comparison
+//#include "fn_1st_order_filter.h"
+
 int 
 main() 
 {
@@ -18,6 +21,12 @@ main()
 	std::cout << "x dim: " << x_arr.x_dim << std::endl;
 
 	matrix y_arr = filter.test(x_arr);
+
+	//* replace by this codegen comparison
+	//matrix y_arr = x_arr;
+	//for (int i = 0; i < x_arr.t_dim; i++) {
+	//	y_arr.val[i] = fn_1st_order_filter(x_arr.val[i], time_step, cutoff_freq);
+	//}
 
 	write_matrix(y_arr, out_file, delimiter);
 	return 0;
