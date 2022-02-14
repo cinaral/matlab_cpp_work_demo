@@ -76,30 +76,7 @@ Verifying results from C/C++ and the embedded system in MATLAB is *not* a substi
 
 
 ## **Example**
-
-As an example, we consider a first-order filter.
-Let $y(t)$ be the filtered version of $x(t)$ with a discrete first order filter of time constant $\tau$, 
-$$ H(s) \triangleq \frac{Y(s)}{X(s)} = \frac{1}{\tau s + 1}$$
-
-Discretized using bilinear transform with a time step of $T$.
-$$\frac{Y(z)}{X(z)} = \frac{T + Tz^{-1}}{(T + 2\tau) + (T - 2\tau)z^{-1}}$$
-
-Let input be a sinusodial input signal,
-$$x(t) = A\sin(\omega t)$$
-
-The impulse response of this system is,
-$$h(t) = \frac{1}{\tau}e^{-\frac{1}{\tau} t}$$
-
-Sudden application of the sinusodial input to system at rest will give the total solution, 
-$$y(t) = \int_0^t F(r) h(t - r) \mathrm{d}r\\
-y(t) = \frac{A e^{-\frac{1}{\tau} t}}{\tau} \int_0^t \sin(\omega r) e^{\frac{1}{\tau}r} \mathrm{d}r \\
-y(t) = \frac{A}{\tau^2\omega^2 + 1} \left(\sin(\omega t) - \tau \omega cos(\omega t) + \tau \omega e^{-\frac{1}{\tau} t}\right)$$
-
-If we had focused on the steady state response we could write,
-$$y_{ss}(t) = \left|H(s)\right| A\sin(\omega t) + \angle H(s) \\
-\left|H(s)\right| = \frac{1}{\tau^2\omega^2 + 1} \\
-\angle H(s) = -\tan^{-1}(\tau\omega)$$
-but this is inaccurate until the transients die out.
+For the derivation see [here](derivation.ipynb).
 
 We implement a first order-filter on a microcontroller in the following steps:
 

@@ -1,7 +1,8 @@
 matrix_io_data
 
-# Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,git,c++,matlab,cmake
-# Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,git,c++,matlab,cmake
+
+# Created by https://www.toptal.com/developers/gitignore/api/git,c++,cmake,matlab,visualstudiocode,jupyternotebooks
+# Edit at https://www.toptal.com/developers/gitignore?templates=git,c++,cmake,matlab,visualstudiocode,jupyternotebooks
 
 ### C++ ###
 # Prerequisites
@@ -69,6 +70,20 @@ _deps
 *_LOCAL_*.txt
 *_REMOTE_*.txt
 
+### JupyterNotebooks ###
+# gitignore template for Jupyter Notebooks
+# website: http://jupyter.org/
+
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# IPython
+profile_default/
+ipython_config.py
+
+# Remove previous ipynb_checkpoints
+#   git rm -r .ipynb_checkpoints/
+
 ### MATLAB ###
 # Windows default autosave extension
 *.asv
@@ -108,7 +123,7 @@ octave-workspace
 !.vscode/tasks.json
 !.vscode/launch.json
 #!.vscode/extensions.json
-#!.vscode/*.code-snippets
+!.vscode/*.code-snippets
 
 # Local History for Visual Studio Code
 .history/
@@ -123,4 +138,4 @@ octave-workspace
 
 # Support for Project snippet scope
 
-# End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,git,c++,matlab,cmake
+# End of https://www.toptal.com/developers/gitignore/api/git,c++,cmake,matlab,visualstudiocode,jupyternotebooks

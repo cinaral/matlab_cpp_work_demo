@@ -19,11 +19,6 @@ function y_0 = filter_1st_order(y_1, x_0, x_1, T, tau)
 %* ---- = ---------------------------------
 %* X(z)   (T + 2*tau) + (T - 2*tau)*z^{-1}
 %*
-%* For derivation try:
-%syms s z T tau
-%H = s/(tau*s + 1);
-%[num, den] = numden(subs(H, s, 2/T*(z - 1)/(z + 1)))
-%*
 %* cinaral 2022-02-12
 
 y_0 = ((T*x_0 + T*x_1) - (T - 2*tau)*y_1)/(T + 2*tau);
