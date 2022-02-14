@@ -1,9 +1,15 @@
 #include "filter_1st_order.h"
 
-filter_1st_order::filter_1st_order(double time_step, double cutoff_freq)
+filter_1st_order::filter_1st_order(double time_step, double cutoff_freq) :
+	time_step_(time_step), 
+	tau_(freq_to_tau(cutoff_freq))
 {
-	time_step_ = time_step;
-	tau_       = 1/(2*PI*cutoff_freq);
+}
+
+double
+filter_1st_order::freq_to_tau(double freq) 
+{
+	return 1/(2*PI*freq);
 }
 
 double 

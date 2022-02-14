@@ -1,5 +1,5 @@
 cutoff_freq = 1; %* [hz]
-time_step   = 1e-3; %* [s]
+time_step   = 1e-2; %* [s]
 t_final     = 10; %* [s]
 t_arr       = 0:time_step:t_final;
 t_arr_len   = length(t_arr);

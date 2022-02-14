@@ -8,11 +8,12 @@
 class filter_1st_order 
 {
 	private:
-		double time_step_;
-		double cutoff_freq_;
-		double tau_;
+		const double time_step_;
+		const double tau_;
 		double y_1_ = 0.0;
 		double x_1_ = 0.0;
+
+		double freq_to_tau(double);
 
 	public:
 		filter_1st_order(double, double);
