@@ -1,5 +1,6 @@
 matrix_io_data
 build/**
+*.s
 
 # Created by https://www.toptal.com/developers/gitignore/api/git,c++,cmake,matlab,visualstudiocode,jupyternotebooks
 # Edit at https://www.toptal.com/developers/gitignore?templates=git,c++,cmake,matlab,visualstudiocode,jupyternotebooks
