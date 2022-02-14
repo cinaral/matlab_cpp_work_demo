@@ -91,7 +91,7 @@ We implement a first order-filter on a microcontroller in the following steps:
 
 You will need a C++ compiler to compile ```.cpp``` files. You can use [VS Code with gcc](https://code.visualstudio.com/docs/languages/cpp) for this task. 
 
-You could also use [VS Code with CMake Tools](https://code.visualstudio.com/docs/cpp/cmake-linux) if you have Bash. [MSYS2](https://www.msys2.org/) is a good way to get Bash VS Code on Windows. [CMake](https://cmake.org/) is an automated cross-platform building system.
+You could also use [VS Code with CMake Tools](https://code.visualstudio.com/docs/cpp/cmake-linux) if you have Bash. [MSYS2](https://www.msys2.org/) is a good way to get Bash VS Code on Windows. [CMake](https://cmake.org/) is an automated cross-platform build system generator.
 
 ## **Extensions**
 
@@ -100,7 +100,7 @@ Once the C/C++ code is verified, it can easily be integrated with new environmen
 
 ## **Potential downsides**
 
-- The prototype and the C/C++ implementation may diverge over time. If this happens, since the C/C++ implementation must be verified, this may necessisate updating the prototype or adding new MATLAB code for comparison purposes. 
+- The prototype and the C/C++ implementation may diverge over time. If this happens, since the C/C++ implementation must be verified, this may necessitate updating the prototype or adding new MATLAB code for comparison purposes. 
 - It may be difficult to write some mathematical abstractions in C/C++ by hand, for example when Symbolic Toolbox is used to obtain the dynamics of a complex system. In this case, some units should be generated and implemented using appropriate wrapper functions.
 
 - MATLAB may not be available everywhere and every time someone wants to verify the C/C++ code. Additionally, whenever possible C/C++ code should have their own testing functions, and these tests should be part of the CMake routine.
