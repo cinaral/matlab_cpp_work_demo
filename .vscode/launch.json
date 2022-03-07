@@ -1,17 +1,39 @@
 {
 	"configurations": [
 		{
-			"name": "test_example",
+			"name": "lldb",
 			"request": "launch",
 			"type": "lldb",
-			"program": "${workspaceFolder}\\build\\Debug\\bin\\test_filter.exe",
+			"program": "${workspaceFolder}\\build\\bin\\${fileBasenameNoExtension}.exe",
 			"args": [],
-			"cwd": "${workspaceFolder}",
+			"cwd": "${workspaceFolder}\\build\\bin",
 			"environment": [],
 			"externalConsole": false,
-			"MIMode": "lldb",
-			"preLaunchTask": "CMake Build"
+			"MIMode": "lldb"
+			//"preLaunchTask": "CMake Build"
 		}
+
+		//* if you want to use gdb:
+		//{
+		//	"name": "g++.exe",
+		//	"type": "cppdbg",
+		//	"request": "launch",
+		//	"program": "${workspaceFolder}\\build\\bin\\${fileBasenameNoExtension}.exe",
+		//	"args": [],
+		//	"stopAtEntry": false,
+		//	"cwd": "${workspaceFolder}\\build\\bin",
+		//	"environment": [],
+		//	"externalConsole": false,
+		//	"MIMode": "gdb",
+		//	"miDebuggerPath": "C:\\Program Files\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\gdb.exe",
+		//	"setupCommands": [
+		//		{
+		//			"description": "Enable pretty-printing for gdb",
+		//			"text": "-enable-pretty-printing",
+		//			"ignoreFailures": true
+		//		}
+		//	],
+		//}
 	],
 	"version": "0.2.0"
 }

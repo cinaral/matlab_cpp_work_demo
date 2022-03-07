@@ -17,11 +17,11 @@ add_compile_options(-fdiagnostics-color=always
 	            	-Wno-unused-variable
 	            	-Wno-unused-but-set-parameter
 	            	-fmax-errors=5 #* max number of warnings
-	            	#-fno-rtti #* disable RTTI 
-	            	#-fno-exceptions #* disable exceptions
-	            	#-fno-non-call-exceptions 
-	            	#-fno-use-cxa-atexit #* disable destructors
-	            	#-fno-common #* declare globals once
+	            	-fno-rtti #* disable RTTI 
+	            	-fno-exceptions #* disable exceptions
+	            	-fno-non-call-exceptions 
+	            	-fno-use-cxa-atexit #* disable destructors
+	            	-fno-common #* declare globals once
 	            	#-ffreestanding #* standard library may be unavailable
 	            	#-fstack-protector-strong #* stack guard, costs one write and read per function, needs canary
 )
