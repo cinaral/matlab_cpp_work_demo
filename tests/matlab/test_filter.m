@@ -15,15 +15,23 @@ while ~feof(param_file)
 end
 fclose(param_file);
 
+time_step  = param.time_step;
+time_const = param.time_const;
+
+%* You would use this if Parameters.hpp didn't exist
+%time_step   = 1e-2;
+%cutoff_freq = 1;
+%time_const  = 1/(2*pi*cutoff_freq);;
+
 %**********************************%
 %* verify filter_1st_order_test.m *%
 %**********************************%
 t_final     = 10; %* [s]
-t_arr       = 0:param.time_step:t_final;
+t_arr       = 0:time_step:t_final;
 t_arr_len   = length(t_arr);
 input_ampl  = 1; 
 input_freq  = 1; %* [hz]
-tau         = param.time_const;
+tau         = time_const;
 w           = 2*pi*input_freq;
 x_arr       = input_ampl*sin(w*t_arr).';
 H_norm      = 1/sqrt(1+ w^2*tau^2);

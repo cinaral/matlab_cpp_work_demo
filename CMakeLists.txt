@@ -46,8 +46,8 @@ file(MAKE_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/param)
 project(ExampleProject VERSION 1.0.0 LANGUAGES CXX)
 
 #* where to look for header and source files
-include_directories(${PROJECT_SOURCE_DIR}/include)
-set(SRC_DIR ${PROJECT_SOURCE_DIR}/src)
+include_directories(${CMAKE_CURRENT_LIST_DIR}/include)
+set(SRC_DIR ${CMAKE_CURRENT_LIST_DIR}/src)
 
 add_library(Filter1stOrder STATIC 
 	        ${SRC_DIR}/Filter1stOrder.cpp 
@@ -55,7 +55,7 @@ add_library(Filter1stOrder STATIC
 
 #* print Parameters.hpp to file after build
 add_executable(ParametersToFile 
-	           ${PROJECT_SOURCE_DIR}/src/ParametersToFile.cpp)
+	           ${SRC_DIR}/ParametersToFile.cpp)
 
 add_custom_command(TARGET ParametersToFile
 				   POST_BUILD

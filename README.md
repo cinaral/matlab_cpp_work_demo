@@ -1,17 +1,61 @@
 # **MATLAB and C/C++ Combined Workflow Demonstration** 
-### 2022-02-12
-
 
 ## **What is this?**
 
 This is an example project about prototyping and verifying C/C++ code using MATLAB.
 
-[MATLAB](https://www.mathworks.com/products/matlab.html) is a programming and numeric computing platform with powerful data analysis and graphics tools. It has built-in functions for many methods taught in the engineering curriculum, and it is familiar to many engineers, scientists and students.
+- [MATLAB](https://www.mathworks.com/products/matlab.html) is a programming and numeric computing platform with powerful data analysis and graphics tools.
+- C is a general-purpose, procedural programming language with little hardware abstraction. It is efficient, portable and commonly used in embedded systems.
+- [C++](https://isocpp.org/get-started) is almost a superset of C. It is one of the highest-level programming languages that can still provide deterministic execution time.
 
-C is a general-purpose, procedural programming language with little hardware abstraction. It is efficient and portable, so it is commonly used in embedded systems.
+## **Quick start**
 
-[C++](https://isocpp.org/get-started) is an extension and a superset of C with a few exceptions. It supports object-oriented, generic, and functional programming features which can help writing readable and maintainable code. For real-time systems C++ is one of the highest-level programming languages that can still provide deterministic execution time.
+### a) Prerequisites:
+1. [CMake](https://cmake.org/)
+2. A C/C++ compiler, e.g. [MinGW-w64 for Windows](https://www.mingw-w64.org/)
+3. [MATLAB](https://www.mathworks.com/products/matlab.html)
 
+### **b) Creating a new project:**
+	
+1. Set up your project directory as shown
+   
+	``` 
+	<Project Name>
+	├─📂docs
+	├─📂include
+	├─📂matlab
+	├─📂src
+	├─📂tests
+	│ └─📂matlab
+	│	└─ run_all_tests.m
+	├─ CMakeLists.txt
+	└─ README.md
+	```
+	| File/Folder                                       | Explanation |
+	| -                                                 | - |
+	| /docs                                             | Documentation files (.md, .docx, .txt...) |
+	| /include                                          | Header files (.h, .hpp, .hxx, ...)   |
+	| /matlab                                           | MATLAB scripts, prototypes, derivations (.m, .slx, ...)   |
+	| /src                                              | Source files (.c, .cpp, .cxx, ...)   |
+	| /tests                                            | Test files (.c, .cpp, .cxx, ...)   |
+	| /tests/matlab                                     | MATLAB test scripts (.m, ...)   |
+	| [run_all_tests.m](./tests/matlab/run_all_tests.m) | MATLAB script to call all MATLAB test scripts |
+	| [CMakeLists.txt](CMakeLists.txt)                  | Describes the build process, read by CMake |
+	| [README.md](README.md)                            | Summary of the project |
+
+2. Start with your mathematical derivations and document them in  ```/docs```, e.g. [derivation.ipynb](./docs/derivation.ipynb). 
+3. Prototype your derivations in MATLAB in ```/matlab```, e.g. [filter_1st_order.m](./matlab/filter_1st_order.m).
+4. Write MATLAB test scripts for your prototypes in ```/tests/matlab``` to verify them.
+5. Code your project based on the prototypes, this step may include C/C++ code generation from MATLAB code. Do whichever is appropriate and convenient. Problem parameters known at compile time should be written in a separate header file, e.g. [Parameters.hpp](./include/Parameters.hpp).
+6. Write your unit tests in ```/tests```. These unit tests should be automated as much as possible, but for verification and debug purposes a human may need to look at some plots. For this task read/write data to disk, and plot the data using MATLAB. It is important to share the problem parameters with the MATLAB test scripts. This can be achieved by including a step in the build instructions to write them to simple MATLAB-readable files, e.g. [ParametersToFile.cpp](./src/ParametersToFile.cpp).
+7. Update the MATLAB test scripts to incorporate the unit tests if desired, e.g. [test_filter.m](./tests/matlab/test_filter.m). 
+
+### **c) Building and verifying an existing project:**
+1. Configure the project using CMake.
+2. Build the project and run CTest tests.
+3. Run the MATLAB script ```run_all_tests.m```.
+   
+For help, see the [How to compile?](#how-to-compile) section.
 
 ## **Main principles**
 
@@ -19,7 +63,7 @@ C is a general-purpose, procedural programming language with little hardware abs
 2. Code and implement in C/C++
 3. Verify in MATLAB
 
-It is encouraged to adopt unit testing and this testing should be done automatically whenever possible. [Here](https://www.boost.org/doc/libs/1_36_0/libs/test/doc/html/tutorials/intro-in-testing.html) is a good introduction to unit testing. The tester may or may not be the original programmer or a programmer.
+Unit testing is highly encouraged. [Here](https://www.boost.org/doc/libs/1_36_0/libs/test/doc/html/tutorials/intro-in-testing.html) is a good introduction to unit testing. The tester may or may not be the original programmer or a programmer.
 
 
 ## **Workflow**
@@ -66,26 +110,13 @@ The workflow is split into three environments,
 2. C/C++: Editor/IDE and build tools
 3. Embedded system: Microcontroller
 
-These environments have different levels of flexibility and portability. The main objective of this workflow is to play the strength of each environment. MATLAB is very powerful for prototyping algorithms and verifying data, and so all verification should take place in MATLAB. 
+These environments have different levels of flexibility and portability. The main objective of this workflow is to play the strengths of each environment. MATLAB is very powerful for prototyping algorithms and verifying data, and so all verification should take place in MATLAB. 
 
-Verification means different things during different stages of development (i) In the prototyping stage it means prototypes are compared against existing data and solutions (e.g. analytical solutions), and (ii) in the code writing and implementation stage it means the results produced meet design expectations. You should worry about ideas while sketching and worry about the technique when drawing. 
+Verification means different things during different stages of development (i) In the prototyping stage it means prototypes are compared against existing data and solutions (e.g. analytical solutions), and (ii) in the coding and implementation stage it means the results produced meet expectations. You should worry about ideas while sketching and worry about the technique when drawing. 
 
-Debugging in the prototyping stage means new ideas are tested, and in the C/C++ stage debugging means the code runs as expected on the target hardware.
 
 Verifying results from C/C++ and the embedded system in MATLAB is *not* a substitute for unit testing in their respective environments. All three environments should have their own (automated) unit testing routines whenever possible, including MATLAB prototypes. The MATLAB prototype can guide unit testing in other environments. 
 
-
-## **Example**
-For the derivation see [here](derivation.ipynb).
-
-We implement a first order-filter on a microcontroller in the following steps:
-
-1. Write ```main.m```, this MATLAB script will serve as the entry point to our project. This file checks if the compiled test function exists and then calls the test script.
-2. Prototype the first order filter in discrete time in ```filter_1st_order.m```. 
-3. Test the prototype using the ```filter_1st_order_test.m``` script. This testing script also serves as an implementation example for the prototype. We verify the prototype by comparing the results to the known solution of 1st order response to a sine wave.
-4. Once satisfied with the prototype, write ```filter_1st_order.cpp``` based on the prototype.
-5. Also write ```filter_1st_order_test.cpp```based on the test script for the prototype, so that it is the same test. This test program also serves as an implementation example for the code.
-6. Compile the test and include it in the MATLAB test script.
 
 ## **How to compile?**
 
@@ -95,12 +126,10 @@ You could also use [VS Code with CMake Tools](https://code.visualstudio.com/docs
 
 ## **Extensions**
 
-Once the C/C++ code is verified, it can easily be integrated with new environments other than the embedded system. For example, it can be wrapped in Python for easy installation and visualization, such as graphical user interfaces. This can potentially extend our verification capabilities by allowing easy communication between different devices over different protocols.
+Once the C/C++ code is verified, it can easily be integrated to any environments. For example, it can be wrapped in Python for easy installation and visualization, such as graphical user interfaces. This can potentially extend our verification capabilities by allowing easy communication between different devices over different protocols.
 
 
-## **Potential downsides**
+## **Potential gotcha's**
 
 - The prototype and the C/C++ implementation may diverge over time. If this happens, since the C/C++ implementation must be verified, this may necessitate updating the prototype or adding new MATLAB code for comparison purposes. 
-- It may be difficult to write some mathematical abstractions in C/C++ by hand, for example when Symbolic Toolbox is used to obtain the dynamics of a complex system. In this case, some units should be generated and implemented using appropriate wrapper functions.
-
-- MATLAB may not be available everywhere and every time someone wants to verify the C/C++ code. Additionally, whenever possible C/C++ code should have their own testing functions, and these tests should be part of the CMake routine.
+- MATLAB may not be available everywhere. Whenever possible the unit tests should work independently of the MATLAB testing scripts.
