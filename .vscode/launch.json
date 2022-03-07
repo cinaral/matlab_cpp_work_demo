@@ -9,8 +9,8 @@
 			"cwd": "${workspaceFolder}\\build\\bin",
 			"environment": [],
 			"externalConsole": false,
-			"MIMode": "lldb"
-			//"preLaunchTask": "CMake Build"
+			"MIMode": "lldb",
+			"preLaunchTask": "CMake Build"
 		}
 
 		//* if you want to use gdb:

@@ -12,7 +12,7 @@ This is an example project about prototyping and verifying C/C++ code using MATL
 
 ### a) Prerequisites:
 1. [CMake](https://cmake.org/)
-2. A C/C++ compiler, e.g. [MinGW-w64 for Windows](https://www.mingw-w64.org/)
+2. A C/C++ compiler, e.g. for Windows, MinGW-w64 from [Msys2](https://www.msys2.org/). 
 3. [MATLAB](https://www.mathworks.com/products/matlab.html)
 
 ### **b) Creating a new project:**
@@ -120,9 +120,18 @@ Verifying results from C/C++ and the embedded system in MATLAB is *not* a substi
 
 ## **How to compile?**
 
+These instructions are for using Visual Studio Code.
+
+1. Install [VS Code](https://code.visualstudio.com/)
+2. Install the following extensions for VS Code: 
+    - [C/C++](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
+	- [CMake Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) (You may follow [these instructions](https://code.visualstudio.com/docs/cpp/cmake-linux) to ensure CMake Tools has been installed properly.)
+3. Install [CMake](https://cmake.org/) and add to path.
+4. For Windows, install [Msys2](https://www.msys2.org/). For other platforms, make sure [gcc](https://gcc.gnu.org/) is installed.
+5. Open the project root folder in VS Code (where the top ```CMakeLists.txt``` lives). By default CMake Tools will configure the project for you, creating a ```build``` folder. You may build and run tests using the task bar on the bottom of your screen.
+
 You will need a C++ compiler to compile ```.cpp``` files. You can use [VS Code with gcc](https://code.visualstudio.com/docs/languages/cpp) for this task. 
 
-You could also use [VS Code with CMake Tools](https://code.visualstudio.com/docs/cpp/cmake-linux) if you have Bash. [MSYS2](https://www.msys2.org/) is a good way to get Bash VS Code on Windows. [CMake](https://cmake.org/) is an automated cross-platform build system generator.
 
 ## **Extensions**
 
