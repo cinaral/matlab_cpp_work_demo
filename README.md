@@ -125,9 +125,9 @@ These instructions are for using Visual Studio Code.
 1. Install [VS Code](https://code.visualstudio.com/)
 2. Install the following extensions for VS Code: 
     - [C/C++](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
-	- [CMake Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) (You may follow [these instructions](https://code.visualstudio.com/docs/cpp/cmake-linux) to ensure CMake Tools has been installed properly.)
+	- [CMake Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) (You may follow [these instructions](https://code.visualstudio.com/docs/cpp/cmake-linux))
 3. Install [CMake](https://cmake.org/) and add to path.
-4. For Windows, install [Msys2](https://www.msys2.org/). For other platforms, make sure [gcc](https://gcc.gnu.org/) is installed.
+4. For Windows, install [Msys2](https://www.msys2.org/). (You may follow [these instructions](https://code.visualstudio.com/docs/cpp/config-mingw)). For other platforms, make sure [gcc](https://gcc.gnu.org/) is installed.
 5. Open the project root folder in VS Code (where the top ```CMakeLists.txt``` lives). By default CMake Tools will configure the project for you, creating a ```build``` folder. You may build and run tests using the task bar on the bottom of your screen.
 
 You will need a C++ compiler to compile ```.cpp``` files. You can use [VS Code with gcc](https://code.visualstudio.com/docs/languages/cpp) for this task. 
