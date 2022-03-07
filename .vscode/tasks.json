@@ -1,31 +1,9 @@
 {
 	"tasks": [
 		{
-			"type": "cppbuild",
-			"label": "C/C++: g++.exe build active file",
-			"command": "C:\\Program Files\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\g++.exe",
-			"args": [
-				"-g", //* print debug info
-				"-Og", //* no optimization, debug
-				//"-O2", //* all optimizations on except speed-size trade-offs
-				"-std=c++14",
-				"-Wall", //* all warnings
-				"-Wextra",
-				"-Wpedantic",
-				"-fdiagnostics-color=always", //* colored diagnostics
-				"-fno-rtti", //* disable RTTI
-				"-fno-exceptions", //* disable exceptions
-				"-fno-non-call-exceptions",
-				"-fno-use-cxa-atexit", //* disable destructors
-				"-ffreestanding", //* standard library may be unavailable
-				"-fno-common", //* declare globals once
-				//"-fstack-protector-strong", //* stack guard, costs one write and read per function, needs canary
-				"-o",
-				"${workspaceFolder}\\filter_1st_order_test.exe",
-				"${workspaceFolder}\\*.cpp",
-				"${workspaceFolder}\\codegen_comparison\\codegen\\lib\\fn_1st_order_filter\\*.cpp",
-				"-I${workspaceFolder}\\codegen_comparison\\codegen\\lib\\fn_1st_order_filter"
-			],
+			"type": "cmake",
+			"label": "CMake Build",
+			"command": "build",
 			"options": {
 				"cwd": "${workspaceFolder}"
 			},

@@ -1,11 +1,29 @@
-cutoff_freq = 1; %* [hz]
-time_step   = 1e-2; %* [s]
+%************************%
+%* Read test parameters *%
+%************************%
+bin_dname   = '../../build/bin';
+param_dname = append(bin_dname, '/', 'param');
+dat_dname   = append(bin_dname, '/', 'dat');
+addpath('../../matlab');
+
+param_file  = fopen(append(param_dname, '/', 'Scalars'), 'r');
+
+while ~feof(param_file)
+	name = fscanf(param_file, '%s', 1);
+	val  = fscanf(param_file, '%f', 1);
+	param.(name) = val;
+end
+fclose(param_file);
+
+%**********************************%
+%* verify filter_1st_order_test.m *%
+%**********************************%
 t_final     = 10; %* [s]
-t_arr       = 0:time_step:t_final;
+t_arr       = 0:param.time_step:t_final;
 t_arr_len   = length(t_arr);
 input_ampl  = 1; 
 input_freq  = 1; %* [hz]
-tau         = 1/(2*pi*cutoff_freq);
+tau         = param.time_const;
 w           = 2*pi*input_freq;
 x_arr       = input_ampl*sin(w*t_arr).';
 H_norm      = 1/sqrt(1+ w^2*tau^2);
@@ -14,7 +32,6 @@ y_chk_arr   = input_ampl/(tau^2*w^2 + 1)*(sin(w*t_arr) - tau*w*cos(w*t_arr) + ta
 y_arr       = zeros(size(x_arr));
 delimiter   = ',';
 
-%* verify filter_1st_order_test.m
 for i = 1:t_arr_len
 
 	if i == 1
@@ -27,7 +44,7 @@ for i = 1:t_arr_len
 	end
 	x_0 = x_arr(i);
 
-	y_arr(i) = filter_1st_order(y_1, x_0, x_1, time_step, tau);
+	y_arr(i) = filter_1st_order(y_1, x_0, x_1, param.time_step, tau);
 end
 
 fprintf('--- filter_1st_order.m:\n');
@@ -36,18 +53,24 @@ mean_x_error = mean(vecnorm(y_arr - y_chk_arr, 2, 2));
 fprintf('max  y(t) err: %g\n', max_x_error);
 fprintf('mean y(t) err: %g\n', mean_x_error);
 
-%* verify filter_1st_order_test.cpp
-if ~exist('matrix_io_data', 'dir')
-	mkdir('matrix_io_data');
-end
-writematrix(x_arr, 'matrix_io_data/x_arr.dat', 'Delimiter', delimiter);  
+%***************%
+%* test_filter *%
+%***************%
 
-if system('.\filter_1st_order_test.exe') > 0
-	error('Could not open filter_1st_order_test.exe');
-end
+%* x_arr is an input to test_filter.exe
+writematrix(x_arr, append(dat_dname, '/', 'x_arr.dat'), 'Delimiter', delimiter);  
 
+%* run test_filter.exe
+prev_pwd = pwd;
+cd(bin_dname);
+if system('test_filter.exe') > 0
+	error('Could not open test_filter.exe');
+end
+cd(prev_pwd);
+
+%* read the output of test_filter.exe
 try
-    y_cpp_arr = readmatrix('matrix_io_data/y_arr.dat', 'Delimiter', delimiter);
+    y_cpp_arr = readmatrix(append(dat_dname, '/', 'y_arr.dat'), 'Delimiter', delimiter);
 catch
     error('Could not open y_arr.dat');
 end
@@ -58,7 +81,9 @@ mean_x_error = mean(vecnorm(y_cpp_arr - y_arr, 2, 2));
 fprintf('max  y_cpp(t) vs y(t): %g\n', max_x_error);
 fprintf('mean y_cpp(t) vs y(t): %g\n', mean_x_error);
 
-%* plot
+%********%
+%* Plot *%
+%********%
 figure('Name', 'filter_1st_oder_test');
 clf;
 hold on;

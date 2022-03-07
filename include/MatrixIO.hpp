@@ -1,5 +1,5 @@
-#ifndef MATRIX_IO_H_CINARAL_2022_02_02_1843
-#define MATRIX_IO_H_CINARAL_2022_02_02_1843
+#ifndef MATRIXIO_H_CINARAL_2022_02_02_1843
+#define MATRIXIO_H_CINARAL_2022_02_02_1843
 
 #include <iostream>
 #include <fstream>
@@ -10,7 +10,7 @@
 struct matrix
 {
 	//* [t_dim, x_dim] matrix
-	std::vector<double> val;
+	std::vector<float> val;
 	int t_dim;
 	int x_dim;
 };

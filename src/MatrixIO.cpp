@@ -1,4 +1,4 @@
-#include "matrix_io.h"
+#include "MatrixIO.hpp"
 
 //* read matrix from file separated by newlines and delimiter
 //* t_dim = number of rows
@@ -33,7 +33,7 @@ matrix read_matrix(const std::string file_name, const std::string delimiter)
 				}
 			}
 			//* last entry before the line break
-			mat.val.push_back(std::stod(line));
+			mat.val.push_back(std::stof(line));
 			
 			//* count the t dimension
 			t_dim++;
@@ -56,6 +56,8 @@ matrix read_matrix(const std::string file_name, const std::string delimiter)
 //* x_dim = number of columns 
 void write_matrix(matrix mat, const std::string file_name, const std::string delimiter)
 {
+	const uint32_t print_precision = std::numeric_limits<float>::digits10 + 1;
+
 	//* output file stream	
 	std::ofstream out_file;
 	out_file.open(file_name);
@@ -65,7 +67,7 @@ void write_matrix(matrix mat, const std::string file_name, const std::string del
 		for (int i = 0; i < mat.t_dim; i++) {
 
 			for (int j = 0; j < mat.x_dim; j++) {
-				out_file << std::setprecision(std::numeric_limits<long double>::digits10 + 1) << mat.val[i*mat.x_dim + j];
+				out_file << std::setprecision(print_precision) << mat.val[i*mat.x_dim + j];
 
 				if (j < mat.x_dim - 1) {
 					out_file << delimiter;
