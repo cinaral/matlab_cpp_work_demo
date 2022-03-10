@@ -70,7 +70,7 @@ target_include_directories(Filter1stOrder
 		${INCLUDE_DIR}	
 )
 
-#* build Parameters.hpp
+#* build ParametersToFile.hpp
 add_executable(ParametersToFile ${SRC_DIR}/ParametersToFile.cpp)
 
 target_include_directories(ParametersToFile
@@ -78,7 +78,7 @@ target_include_directories(ParametersToFile
 		${INCLUDE_DIR}	
 )
 
-#* call Parameters.exe after build
+#* call ParametersToFile.exe after build
 add_custom_command(
 	TARGET ParametersToFile
 	POST_BUILD
@@ -99,7 +99,7 @@ set(TEST_NAMES
 
 #* loops through all tests
 foreach(ELEMENT ${TEST_NAMES})
-	add_executable(${ELEMENT} tests/${ELEMENT}.cpp)
+	add_executable(${ELEMENT} test/${ELEMENT}.cpp)
 	target_link_libraries(${ELEMENT} Filter1stOrder)
 	add_test(NAME              ${ELEMENT} 
 		     COMMAND           ${ELEMENT}
