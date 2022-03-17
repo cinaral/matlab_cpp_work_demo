@@ -1,4 +1,5 @@
 build/**
+dat/**
 *.s
 
 # Created by https://www.toptal.com/developers/gitignore/api/git,c++,cmake,matlab,visualstudiocode,jupyternotebooks

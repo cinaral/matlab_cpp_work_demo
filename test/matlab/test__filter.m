@@ -1,11 +1,22 @@
 %************************%
 %* Read test parameters *%
 %************************%
-bin_dname   = '../../build/bin';
-param_dname = append(bin_dname, '/', 'param');
-dat_dname   = append(bin_dname, '/', 'dat');
+
+%* setup path and IO dirs
 addpath('../../matlab');
 
+bin_dname   = '../../build/bin';
+param_dname = append(bin_dname, '/', 'param');
+dat_dname   = '../../dat';
+delimiter   = ',';
+
+test_name   = 'test-filter';
+prefix      = append(dat_dname, '/');
+x_arr_fname = append(prefix,    'x_arr.dat');
+y_arr_fname = append(prefix,    'y_arr.dat');
+exe_name    = append(test_name, '.exe');
+
+%* read the parameters
 param_file  = fopen(append(param_dname, '/', 'Scalars'), 'r');
 
 while ~feof(param_file)
@@ -66,19 +77,19 @@ fprintf('mean y(t) err: %g\n', mean_x_error);
 %***************%
 
 %* x_arr is an input to test_filter.exe
-writematrix(x_arr, append(dat_dname, '/', 'x_arr.dat'), 'Delimiter', delimiter);  
+writematrix(x_arr, x_arr_fname, 'Delimiter', delimiter);  
 
 %* run test_filter.exe
 prev_pwd = pwd;
 cd(bin_dname);
-if system('test_filter.exe') > 0
-	error('Could not open test_filter.exe');
+if system(exe_name) > 0
+	error(append('Could not open ', bin_dname, '/', exe_name));
 end
 cd(prev_pwd);
 
 %* read the output of test_filter.exe
 try
-    y_cpp_arr = readmatrix(append(dat_dname, '/', 'y_arr.dat'), 'Delimiter', delimiter);
+    y_cpp_arr = readmatrix(y_arr_fname, 'Delimiter', delimiter);
 catch
     error('Could not open y_arr.dat');
 end

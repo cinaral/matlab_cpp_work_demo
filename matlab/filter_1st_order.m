@@ -1,12 +1,12 @@
-function y_0 = filter_1st_order(y_1, x_0, x_1, T, tau)
+function y = filter_1st_order(y_prev, x, x_prev, T, tau)
 %* Practical differentiator with first order filter
-%* y_0 = filter_1st_order(x, T, tau)  
-%* y_0 - filtered x at the current time step
-%* y_1 - filtered x at the previous time step
-%* x_0 - x at the current time step
-%* x_1 - x at the previous time step
-%* T   - time step
-%* tau - time constant
+%* y = filter_1st_order(x, T, tau)  
+%* y      - filtered x at the current time step
+%* y_prev - filtered x at the previous time step
+%* x      - x at the current time step
+%* x_prev - x at the previous time step
+%* T      - time step
+%* tau    - time constant
 %*
 %* Let y(t) be the filtered version of x(t):
 %* Y(s)       1
@@ -21,6 +21,6 @@ function y_0 = filter_1st_order(y_1, x_0, x_1, T, tau)
 %*
 %* cinaral 2022-02-12
 
-y_0 = ((T*x_0 + T*x_1) - (T - 2*tau)*y_1)/(T + 2*tau);
+y = ((T*x + T*x_prev) - (T - 2*tau)*y_prev)/(T + 2*tau);
 
 end
