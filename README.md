@@ -130,7 +130,14 @@ These instructions are for using Visual Studio Code.
 4. For Windows, install [Msys2](https://www.msys2.org/). (You may follow [these instructions](https://code.visualstudio.com/docs/cpp/config-mingw)) and add ```C:\msys64\mingw64\bin``` to path. Open an Msys2 terminal type, in ```pacman -Syu``` and ```pacman -S --needed base-devel mingw-w64-x86_64-toolchain```. For other platforms, make sure [gcc](https://gcc.gnu.org/) is installed.
 5. Verify g++ installation by typing ```g++ --version``` in an Msys2 terminal. It should display the current version.
 6. Open the project root folder in VS Code (where the top ```CMakeLists.txt``` lives). By default CMake Tools will configure the project for you, creating a ```build``` folder. You may build and run tests using the task bar on the bottom of your screen.
-7. If CMake tools fails to find prefered generator, set ```"cmake.generator": "C:\msys64\mingw64\bin"``` in VS Code settings.
+7. If CMake tools fails to find prefered generator, addd 
+```	
+"cmake.mingwSearchDirs": [
+	"C:\\mingw-w64\\mingw64\\bin"
+],
+"cmake.generator": "MinGW Makefiles"
+``` 
+to your VS Code settings (or your absolute path to mingw64 bin directory).
 
 You will need a C++ compiler to compile ```.cpp``` files. You can use [VS Code with gcc](https://code.visualstudio.com/docs/languages/cpp) for this task. 
 
