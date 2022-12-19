@@ -2,7 +2,7 @@
 
 ## **What is this?**
 
-This is an example project about prototyping and verifying C/C++ code using MATLAB.
+This is an example project about generating, verifying and integrating C/C++ code using MATLAB and CMake. For a minimum example, see the [related example project](https://github.com/cinaral/matlab_cmake_demo).
 
 - [MATLAB](https://www.mathworks.com/products/matlab.html) is a programming and numeric computing platform with powerful data analysis and graphics tools.
 - C is a general-purpose, procedural programming language with little hardware abstraction. It is efficient, portable and commonly used in embedded systems.
