@@ -151,3 +151,7 @@ Once the C/C++ code is verified, it can easily be integrated to any environments
 
 - The prototype and the C/C++ implementation may diverge over time. If this happens, since the C/C++ implementation must be verified, this may necessitate updating the prototype or adding new MATLAB code for comparison purposes. 
 - MATLAB may not be available everywhere. Whenever possible the unit tests should work independently of the MATLAB testing scripts.
+
+## Acknowledgements
+
+This work was supported by the National Science Foundation DCSD Grant (No. 2029181).
